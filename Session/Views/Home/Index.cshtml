@@ -6,14 +6,19 @@
 </head>
 <body>
     <div ng-app="app">
-        <div ng-controller="appCtrl">
+        <div ng-controller="appCtrl as Ctrl1">
             <h1>Title:  {{pageTitle}}</h1>
             <input type="text" ng-model="firstName" />
             <input type="text" ng-model="lastName" />
             <input type="button" name="nameButton" value="Show Name" onclick="showDiv()" />
+            <div ng-controller="appCtrl1 as Ctrl2">
+                <h2>
+                    title2: {{Ctrl2.pageTitle}}
+                </h2>
+            </div> 
             <div id="nameDiv"  style="display:none;" class="name">
                 <h2>
-                    Name: {{fullName(firstName, lastName)}}
+                    Name: {{Ctrl1.fullName(firstName, lastName)}}
                 </h2>
             </div>
             
