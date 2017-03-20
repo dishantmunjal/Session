@@ -1,14 +1,23 @@
 ﻿<html>
 <head>
-        <title>
-            NG_App
-        </title>
+    <title>
+        NG_App
+    </title>
 </head>
 <body>
     <div ng-app="app">
         <div ng-controller="appCtrl">
-            <input type="text" ng-model="pageTitle" />
             <h1>Title:  {{pageTitle}}</h1>
+            <input type="text" ng-model="firstName" />
+            <input type="text" ng-model="lastName" />
+            <input type="button" name="nameButton" value="Show Name" onclick="showDiv()" />
+            <div id="nameDiv"  style="display:none;" class="name">
+                <h2>
+                    Name: {{fullName(firstName, lastName)}}
+                </h2>
+            </div>
+            
+            
         </div>
     </div>
     <script src="~/lib/angular/angular.js"></script>
