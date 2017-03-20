@@ -7,18 +7,35 @@
 <body>
     <div ng-app="app">
         <div ng-controller="appCtrl as Ctrl1">
-            <h1>Title:  {{pageTitle}}</h1>
-            <input type="text" ng-model="firstName" />
-            <input type="text" ng-model="lastName" />
-            <input type="button" name="nameButton" value="Show Name" onclick="showDiv()" />
-            <div id="nameDiv"  style="display:none;" class="name">
-                <h2>
-                    Name: {{Ctrl1.fullName(firstName, lastName)}}
-                </h2>
-            </div>
-            
-            
+            <h1>Title:  {{Ctrl1.pageTitle}}</h1>
         </div>
+        <div ng-controller="appCtr">
+            <div id="nameDiv" >
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                Questions
+                            </th>
+                            <th>
+                                Level
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="question in questions">
+                            <td>
+                                {{question.value}}
+                            </td>
+                            <td>
+                                {{question.difficultLevel}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
     </div>
     <script src="~/lib/angular/angular.js"></script>
 
