@@ -9,8 +9,12 @@
         <div ng-controller="appCtrl as Ctrl1">
             <h1>Title:  {{Ctrl1.pageTitle}}</h1>
         </div>
+        
+
         <div ng-controller="appCtr">
-            <div id="nameDiv" >
+            <input type="button" name="nameButton" value="Accept" ng-click="accept()" />
+            <input type="button" name="nameButton" value="Reject" ng-click="reject()" />
+            <div id="tableDiv" style="display:none">
                 <table>
                     <thead>
                         <tr>
@@ -33,6 +37,11 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div id="errorDiv" style="display:none">
+                <h1>
+                    Error message: {{error}}
+                </h1>
             </div>
         </div>
         

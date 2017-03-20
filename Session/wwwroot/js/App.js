@@ -23,27 +23,55 @@ app.controller("appCtrl1", function ($scope, fullName) {
 
 app.controller("appCtr", function ($scope, data) {
     var getQuestions = function () {
-        $scope.questions = data.getQuestions();
+        data.getQuestions();
+            
     }
     getQuestions();
+    $scope.accept = function () {
+        document.getElementById('tableDiv').style.display = "block";
+        document.getElementById('errorDiv').style.display = "none";
+        data.resolve().then(function (data) {
+            $scope.questions = data;
+        });
+    };
+    $scope.reject = function () {
+        document.getElementById('errorDiv').style.display = "block";
+        document.getElementById('tableDiv').style.display = "none";
+        data.reject().then(null, function (data) {
+            $scope.error = data;
+        });
+    };
 });
 
-app.factory('data', function ($q) {
+app.factory('data', function ($q, $http) {
     var getQuestions = function () {
-        return [
-            {
-                value: "Q1",
-                difficultLevel: 100
-            },
-            {
-                value: "Q2",
-                difficultLevel: 300
-            }
-        ];
+        var deferred = $q.defer();
+        
+        return deferred.promise;
+    }
+
+    var resolve = function () {
+        var deferred = $q.defer();
+        var url = "http://questhunt.azurewebsites.net/api/questions";
+        $http.get(url)
+            .then(function (response) {
+                deferred.resolve(response.data);
+            })
+        
+        return deferred.promise;
+    }
+
+
+    var reject = function () {
+        var deferred = $q.defer();
+        deferred.reject("blah");
+        return deferred.promise;
     }
 
     return {
         getQuestions: getQuestions
+        , resolve: resolve
+        , reject: reject
     }
 });
 
