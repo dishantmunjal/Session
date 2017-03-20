@@ -1,19 +1,20 @@
 ﻿var app = angular.module("app", []);
 
-app.controller("appCtrl", function ($scope) {
+app.controller("appCtrl", function ($scope,fullName) {
     this.pageTitle = "My angular application";
     this.fullName = function (firstName, lastName) {
-        return lastName + ", " + firstName;
+        console.log(firstName);
+
+        return fullName.getName(firstName, lastName);
     }
 });
-app.controller("appCtrl1", function ($scope) {
-    this.pageTitle = "My angular applica";
-    this.fullName = function (firstName, lastName) {
-        return lastName + ", " + firstName;
-    }
-});
+
 function showDiv() {
     document.getElementById('nameDiv').style.display = "block";
-}
+};
 
-
+app.service('fullName', function () {
+    this.getName = function (firstName, lastName) {
+        return lastName + ", " + firstName;
+    }
+});
